@@ -2,7 +2,6 @@ package Tests;
 import org.junit.Before;
 import org.junit.Test;
 import org.launchcode.techjobs_oo.*;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -14,9 +13,13 @@ public class JobTest {
 
     @Before
     public void createJobObjects() {
+
         job1 = new Job();
-        job2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        job3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        job2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
+                new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        job3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
+                new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
 
     }
 
@@ -50,4 +53,18 @@ public class JobTest {
     public void testJobsForEquality(){
         assertFalse(job2.equals(job3));
     }
+
+    @Test
+    public void testToString(){
+        assertTrue(job2.toString().startsWith("\n") && job2.toString().endsWith("\n"));
+    }
+    @Test
+    public void testLines(){
+        for(String line : job2.toString().split("\n")){
+            for(String segment: line.split(":")){
+                assertFalse(segment.equals(" null"));
+            }
+        }
+    }
+
 }
